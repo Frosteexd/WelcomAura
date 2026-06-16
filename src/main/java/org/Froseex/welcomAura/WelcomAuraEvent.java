@@ -23,18 +23,17 @@ public class WelcomAuraEvent implements Listener {
        Player player = event.getPlayer();
        String playerName = player.getName();
        World world = player.getWorld();
-        if (!(plugin.getConfig().isSet("welcome-message"))) {
-            Bukkit.getLogger().info("Не удалось найти config.yml");
-            return;
-        }
+        String msg = plugin.getConfig().getString("welcome-message", "fallback");
+        double radius = plugin.getConfig().getDouble("radius", 10.0 );
+        double radiusSquared = radius * radius;
+
             for (Player target : world.getPlayers()) {
            if (target.equals(player)) {
                continue;
            }
            double distance = player.getLocation().distanceSquared(target.getLocation());
-           if (distance <= 100) {
-               String welcomeMessage = plugin.getConfig().getString("welcome-message", "Возле вас игрок ");
-               target.sendMessage(welcomeMessage + playerName);
+           if (distance <= radiusSquared) {
+               target.sendMessage(msg + playerName);
            }
        }
 
