@@ -1,0 +1,6 @@
+name: WelcomAura
+version: '${version}'
+
+main: org.Froseex.welcomAura.WelcomAura
+api-version: '1.21'
+load: POSTWORLD
